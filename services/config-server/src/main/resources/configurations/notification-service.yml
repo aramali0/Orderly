@@ -1,0 +1,37 @@
+spring:
+  data:
+    mongodb:
+      username: root
+      password: root
+      host: localhost
+      port: 27017
+      database: customer
+      authentication-database: admin
+  kafka:
+    consumer:
+      bootstrap-servers: localhost:9092
+      group-id: paymentGroup, orderGroup
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+        spring.json.trusted.packages: com.aramali.ecommerce.kafka.order, com.aramali.ecommerce.kafka.payment
+        spring.json.type.mapping: orderConfirmation:com.aramali.ecommerce.kafka.order.OrderConfirmation, paymentConfirmation:com.aramali.ecommerce.kafka.payment.PaymentConfirmation
+      auto-offset-reset: earliest
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: mouhammedaramali@gmail.com
+    password: cmwu wlgw guzk rigz
+    properties:
+      mail:
+        smtp:
+          trust: "*"
+        auth: true
+        starttls:
+          enable: true
+        connection:
+          timeout: 5000
+        timeout: 3000
+        write-timeout: 5000
+server:
+  port: 8040
